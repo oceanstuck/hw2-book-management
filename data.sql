@@ -1,12 +1,17 @@
 CREATE DATABASE library;
 CREATE TABLE books (
-	itemID int NOT NULL AUTO INCREMENT,
+	bookID int NOT NULL AUTO_INCREMENT,
 	title varchar(255) NOT NULL,
 	author varchar(255) NOT NULL,
 	publisher varchar(255) NOT NULL,
-	year int NOT NULL,
-	isbn varchar(18),
-	qty int NOT NULL,
-	CHECK (qty>=0),
-	PRIMARY KEY itemID
+    edition int DEFAULT 1,
+	year int,
+	isbn varchar(13),
+	qty int DEFAULT 0,
+	CHECK (qty>=0 AND edition>0),
+	PRIMARY KEY (bookID)
 );
+CREATE UNIQUE INDEX bookEd ON books (title, edition);
+
+INSERT INTO books VALUES (1, "Apostles of Mercy", "Lindsay Ellis", "St. Martin\'s Press", 1, 2024, "9781250274564", 1);
+SELECT * FROM books;
